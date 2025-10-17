@@ -78,6 +78,7 @@ class AntColony:
 
     def reset(self) -> None:
         """Reset pheromones and best solution for a new run."""
+        n_cities = self.paths.shape[1]
         self.pheromones = np.ones((n_cities, n_cities), dtype=float)
         np.fill_diagonal(self.pheromones, 0)
         self.best_path = np.zeros(n_cities, dtype=int)

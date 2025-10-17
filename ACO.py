@@ -124,9 +124,7 @@ class AntColony:
         Returns: None
         """
         rng = np.random.default_rng(seed)
-        n_ants = len(self.ants)
-        seeds = rng.integers(2**32 - 1, size=n_ants)
-        tasks = [(self.ants[i], seeds[i], self.pheromones, distances) for i in range(n_ants)]
+        tasks = [(ant, rng.integers(2**32 - 1), self.pheromones, distances) for ant in self.ants]
         with mp.get_context("spawn").Pool(processes=n_workers) as pool:
             tours = pool.starmap(tour, tasks)
             
